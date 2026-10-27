@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>2nd Quarter | Drill 2</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.3.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  
+
+<style>
+    :root {
+        --background: #121612;
+        --paper: #28291f;
+        --paper-light: #343327;
+        --spine: #51302b;
+        --green: #344b39;
+        --teal: #477675;
+        --burgundy: #743440;
+        --gold: #d2b477;
+        --bronze: #a87948;
+        --parchment: #e9ddc3;
+        --muted: #b3aa94;
+        --input: #191c17;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 65px 16px;
+        background-color: var(--background);
+        background-image:
+            radial-gradient(
+                ellipse at 50% 5%,
+                rgba(78, 91, 62, 0.25),
+                transparent 50%
+            ),
+            repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 95px,
+                rgba(190, 151, 91, 0.035) 96px,
+                transparent 99px
+            ),
+            radial-gradient(
+                ellipse at 100% 100%,
+                rgba(116, 52, 64, 0.17),
+                transparent 45%
+            );
+        color: var(--parchment);
+        font-family: 'Nunito', sans-serif;
+    }
+
+    main.container {
+        position: relative;
+        max-width: 510px;
+        margin: 0 auto;
+        padding: 38px 34px;
+        overflow: hidden;
+        background:
+            repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 31px,
+                rgba(210, 180, 119, 0.025) 32px
+            ),
+            linear-gradient(135deg, #302f24, #22261f 70%);
+        border: 1px solid #716044;
+        border-left: 8px solid #55352d;
+        border-radius: 4px 8px 8px 4px;
+        box-shadow:
+            inset 5px 0 8px rgba(0, 0, 0, 0.35),
+            inset 0 0 0 3px rgba(210, 180, 119, 0.04),
+            -3px 0 0 #30251f,
+            -6px 0 0 #775b3b,
+            5px 0 0 #b5a17a,
+            8px 0 0 #65583f,
+            0 25px 60px rgba(0, 0, 0, 0.55);
+    }
+
+    /* A little bookplate at the top of the cover */
+    main.container::before {
+        content: "✦  THE OBMC BOOK CLUB  ✦";
+        display: block;
+        margin: 0 auto 25px;
+        padding: 10px 5px;
+        border-top: 1px solid var(--bronze);
+        border-bottom: 1px solid var(--bronze);
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 3px;
+        text-align: center;
+    }
+
+    /* The page edges of the book */
+    main.container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 7px;
+        height: 100%;
+        background: repeating-linear-gradient(
+            to bottom,
+            #c5b38e 0px,
+            #c5b38e 2px,
+            #847454 2px,
+            #847454 3px
+        );
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    h3 {
+        margin: 0 0 12px;
+        color: var(--gold);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 29px;
+        font-weight: 600;
+        line-height: 1.35;
+        text-align: center;
+        text-shadow: 0 2px 12px rgba(210, 180, 119, 0.12);
+    }
+
+    /* A little illustration above the title */
+    h3::before {
+        content: "📚";
+        display: block;
+        margin-bottom: 12px;
+        font-family: sans-serif;
+        font-size: 35px;
+        filter: saturate(0.75);
+    }
+
+    h3::after {
+        content: "—  ❦  —";
+        display: block;
+        margin-top: 12px;
+        color: var(--bronze);
+        font-size: 16px;
+        letter-spacing: 3px;
+    }
+
+    .subtitle {
+        max-width: 320px;
+        margin: 0 auto 30px;
+        color: var(--muted);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 14px;
+        font-style: italic;
+        line-height: 1.9;
+        text-align: center;
+    }
+
+
+
+    .form-label {
+        margin-bottom: 8px;
+        color: #ddcba6;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .form-control {
+        padding: 13px 14px;
+        border: 1px solid #60553e;
+        border-radius: 3px;
+        background-color: var(--input);
+        color: var(--parchment);
+        font-family: 'Nunito', sans-serif;
+        font-size: 14px;
+        transition:
+            border-color 0.25s,
+            box-shadow 0.25s,
+            background-color 0.25s;
+    }
+
+    .form-control::placeholder {
+        color: #898572;
+        font-style: italic;
+    }
+
+    .form-control:focus {
+        border-color: var(--gold);
+        background-color: #20251e;
+        color: var(--parchment);
+        box-shadow: 0 0 0 3px rgba(210, 180, 119, 0.13);
+    }
+
+    .btn-primary {
+        width: 100%;
+        margin-top: 12px;
+        padding: 14px 10px;
+        border: 1px solid var(--bronze);
+        border-radius: 3px;
+        background: linear-gradient(
+            110deg,
+            #344b39,
+            #3d5145 45%,
+            #493139
+        );
+        color: #f0dfbd;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 15px;
+        letter-spacing: 1px;
+        transition:
+            background 0.25s,
+            border-color 0.25s,
+            transform 0.25s,
+            box-shadow 0.25s;
+    }
+
+    .btn-primary::before {
+        content: "❧  ";
+        color: var(--gold);
+    }
+
+    .btn-primary::after {
+        content: "  ❧";
+        color: var(--gold);
+    }
+
+    .btn-primary:hover {
+        border-color: var(--gold);
+        background: linear-gradient(
+            110deg,
+            var(--burgundy),
+            #57323a 55%,
+            var(--green)
+        );
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    #result {
+        margin-top: 24px;
+        padding: 18px;
+        border: 1px solid #62543a;
+        border-left: 4px solid var(--gold);
+        border-radius: 3px;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(71, 118, 117, 0.12),
+                transparent 60%
+            ),
+            #1b201a;
+        color: var(--parchment);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 14px;
+        line-height: 1.9;
+        overflow-wrap: anywhere;
+    }
+
+    #result:empty {
+        display: none;
+    }
+
+    #result:not(:empty)::before {
+        content: "✦  HAVE THE SCROLLS CHOSEN YOU FOR THE OBMC BOOK CLUB?  ✦";
+        display: block;
+        margin-bottom: 12px;
+        padding-bottom: 9px;
+        border-bottom: 1px solid #514a36;
+        color: var(--gold);
+        font-family: 'Nunito', sans-serif;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.4px;
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding: 30px 14px;
+        }
+
+        main.container {
+            padding: 30px 22px;
+        }
+
+        h3 {
+            font-size: 25px;
+        }
+
+        main.container::before {
+            font-size: 9px;
+            letter-spacing: 2px;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    <main class="container">
+        <h3>Add New Club Member</h3>
+
+        <p class="subtitle">
+            Enter your first and last name here.
+        </p>
+
+        <!-- Form for entering a new member into the club -->
+        <form class="mb-4" onsubmit="return false;">
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input
+                    type="text"
+                    id="first_name"
+                    class="form-control"
+                    placeholder="Enter your first name"
+                    autocomplete="given-name"
+                    required
+                >
+            </div>
+
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input
+                    type="text"
+                    id="last_name"
+                    class="form-control"
+                    placeholder="Enter your last name"
+                    autocomplete="family-name"
+                    required
+                >
+            </div>
+
+            <!-- Runs the Python function -->
+            <button
+                type="button"
+                py-click="candidate_checker"
+                class="btn btn-primary"
+            >
+                Check Membership
+            </button>
+        </form>
+
+        <!-- Python displays the verification result in this part -->
+        <div id="result" aria-live="polite"></div>
+    </main>
+
+    <!-- Loads the Python program -->
+    <py-script src="main.py"></py-script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
