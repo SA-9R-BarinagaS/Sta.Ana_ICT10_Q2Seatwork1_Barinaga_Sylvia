@@ -1,0 +1,1 @@
+# Sta.Ana_ICT10_Q2Seatwork1_Barinaga_Sylvia
